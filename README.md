@@ -1,5 +1,5 @@
 # YandexWeatherApi
-Just wrapper for Yandex Weather.
+Wrapper for Yandex Weather.
 
 ## Create a request
 Access token you should get on the Yandex site.
