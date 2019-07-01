@@ -24,10 +24,10 @@ namespace YandexWeatherApi
     public class YandexRequest
     {
         private const string Method = "GET";
+
         public string ApiUri { get; set; } = "https://api.weather.yandex.ru/v1/";
         public AccessTypeEnum AccessType { get; set; } = AccessTypeEnum.forecast;
         public LanguageEnum Language { get; set; } = LanguageEnum.Null;
-
         public string AccessToken { get; set; } // X-Yandex-API-Key
         public string Latitude { get; set; }
         public string Longitude { get; set; }
@@ -62,10 +62,8 @@ namespace YandexWeatherApi
             Language = lang;
         }
 
-        private Uri GetUri()
-        {
-            return new Uri(new Uri(ApiUri), ParametersForLink);
-        }
+        private Uri GetUri() 
+            => new Uri(new Uri(ApiUri), ParametersForLink);
 
         private string ParametersForLink
         {

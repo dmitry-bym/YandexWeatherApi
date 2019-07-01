@@ -8,7 +8,6 @@ namespace YandexWeatherApi
 {
     public class YandexService
     {
-        private WeatherInfo _weatherInfo;
         private readonly HttpWebRequest _request;
 
         public YandexService(YandexRequest request)
@@ -16,13 +15,7 @@ namespace YandexWeatherApi
             _request = request.Request ?? throw new ArgumentNullException("Request"); ;
         }
 
-        public WeatherInfo GetWeatherInfo()
-        {
-            DoRequest();
-            return _weatherInfo;
-        }
-
-        private void DoRequest()
+        private WeatherInfo GetWeatherInfo()
         {
             using (var response = _request.GetResponse())
             {
@@ -31,9 +24,9 @@ namespace YandexWeatherApi
                 using (var stream = new StreamReader(responseStream))
                 {
                     var weatherInfoString = stream.ReadToEnd();
-                    _weatherInfo = JsonConvert.DeserializeObject<WeatherInfo>(weatherInfoString);
+                    return JsonConvert.DeserializeObject<WeatherInfo>(weatherInfoString);
                 }
-            }
+            };
         }
     }
 }
