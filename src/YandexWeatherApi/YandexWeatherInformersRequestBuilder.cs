@@ -19,10 +19,10 @@ public sealed class YandexWeatherInformersRequestBuilder
     public WeatherLocale? WeatherLocale { get; set; }
 
 
-    public Task<Root> Send(CancellationToken ct)
+    public Task<Result<Informers>> Send(CancellationToken ct)
     {
         Validate();
-        return _weatherService.Send<Root>(CreateRequest(), ct);
+        return _weatherService.Send<Informers>(CreateRequest(), ct);
     }
     
     private IWeatherRequest CreateRequest()
@@ -30,6 +30,7 @@ public sealed class YandexWeatherInformersRequestBuilder
         var parameters = GetRequestParams();
         return new YandexWeatherRequest(ApiVersion, WeatherType, parameters);
     }
+    
     private IEnumerable<(string Name, string Value)> GetRequestParams()
     {
         yield return ("lat", WeatherLocality!.Latitude);

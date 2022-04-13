@@ -1,46 +1,61 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
 
 namespace YandexWeatherApi;
 
+public class YandexWeatherOptions
+{
+    public string? ApiKey { get; set; }
+    
+    public ILogger? Logger { get; set; }
+    
+    public IHttpClientFactory? ClientFactory { get; set; }
+}
+
 public class YandexWeatherServiceBuilder
 {
-    private IHttpClientFactory? _clientFactory;
-    private string? _apiKey;
+    private readonly YandexWeatherOptions _options = new();
+
+    public YandexWeatherServiceBuilder Configure(Action<YandexWeatherOptions> configureOptions)
+    {
+        configureOptions(_options);
+        return this;
+    }
 
     public YandexWeatherServiceBuilder UseHttpClient(HttpClient client)
     {
-        if (_clientFactory is not null)
+        if (_options.ClientFactory is not null)
             throw new ArgumentException("Client already configured.", nameof(client));
         
-        _clientFactory = new ClientFactory(client);
+        _options.ClientFactory = new ClientFactory(client);
         return this;
     }
     
     public YandexWeatherServiceBuilder UseHttpClientFactory(IHttpClientFactory clientFactory)
     {
-        if (_clientFactory is not null)
+        if (_options.ClientFactory is not null)
             throw new ArgumentException("Client already configured.", nameof(clientFactory));
         
-        _clientFactory = clientFactory;
+        _options.ClientFactory = clientFactory;
         return this;
     }
     
     public YandexWeatherServiceBuilder UseApiKey(string apiKey)
     {
-        _apiKey = apiKey;
+        _options.ApiKey = apiKey;
         return this;
     }
 
     public YandexWeatherService Build()
     {
         Validate();
-        return new YandexWeatherService(_clientFactory ?? new ClientFactory(new HttpClient()), new WeatherServiceSettings(_apiKey!));
+        return new YandexWeatherService(_options.ClientFactory ?? new ClientFactory(new HttpClient()), new WeatherServiceSettings(_options.ApiKey!));
     }
     
     private void Validate()
     {
-        if (string.IsNullOrEmpty(_apiKey))
-            throw new ValidationException()
+        if (string.IsNullOrEmpty(_options.ApiKey))
+            throw new ValidationException(); //todo correct exception
     }
 
     private class ClientFactory : IHttpClientFactory

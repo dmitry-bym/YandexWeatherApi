@@ -57,7 +57,7 @@ public record Forecast(
     [property: JsonPropertyName("parts")] IReadOnlyList<Part> Parts
 );
 
-public record Root(
+public record Informers(
     [property: JsonPropertyName("now")] int Now,
     [property: JsonPropertyName("now_dt")] DateTime NowDt,
     [property: JsonPropertyName("info")] Info Info,
