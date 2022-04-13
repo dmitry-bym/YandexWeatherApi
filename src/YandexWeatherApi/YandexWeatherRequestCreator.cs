@@ -9,12 +9,12 @@ internal sealed class YandexWeatherRequestCreator : IYandexWeatherRequestCreator
         _weatherClient = weatherClient;
     }
 
-    public YandexWeatherInformersRequest Informers()
+    public IYandexWeatherInformersRequest Informers()
     {
         return new YandexWeatherInformersRequest(_weatherClient);
     }
 
-    public YandexWeatherForecastRequest Forecast()
+    public IYandexWeatherForecastRequest Forecast()
     {
         return new YandexWeatherForecastRequest(_weatherClient);
     }

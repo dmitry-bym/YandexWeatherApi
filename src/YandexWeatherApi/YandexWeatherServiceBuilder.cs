@@ -6,6 +6,9 @@ public class YandexWeatherServiceBuilder
 {
     private readonly YandexWeatherOptions _options = new();
 
+    internal YandexWeatherServiceBuilder()
+    { }
+    
     public YandexWeatherServiceBuilder Configure(Action<YandexWeatherOptions> configureOptions)
     {
         configureOptions(_options);
@@ -25,8 +28,8 @@ public class YandexWeatherServiceBuilder
     {
         return new YandexWeatherClient(_options);
     }
-    
-    public void Validate()
+
+    private void Validate()
     {
         if (string.IsNullOrEmpty(_options.ApiKey))
             throw new ValidationException();

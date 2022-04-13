@@ -21,6 +21,7 @@ internal class YandexWeatherClient : IYandexWeatherClient
         _apiKey = serviceSettings.ApiKey!;
         _client = serviceSettings.Client;
     }
+    
     public Task<Result<TResponse>> Send<TResponse>(YandexWeatherRequest request, CancellationToken ct)
     {
         return (_clientFactory, _client) switch

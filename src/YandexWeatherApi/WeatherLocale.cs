@@ -3,7 +3,7 @@
 /// <summary>
 /// <c>WeatherLocale</c> is alias for locales
 /// </summary>
-public class WeatherLocale
+public record WeatherLocale
 {
     public string Locale { get; }
     

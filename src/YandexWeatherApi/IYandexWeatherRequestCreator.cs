@@ -2,6 +2,6 @@
 
 public interface IYandexWeatherRequestCreator
 {
-    YandexWeatherInformersRequest Informers();
-    YandexWeatherForecastRequest Forecast();
+    IYandexWeatherInformersRequest Informers();
+    IYandexWeatherForecastRequest Forecast();
 }

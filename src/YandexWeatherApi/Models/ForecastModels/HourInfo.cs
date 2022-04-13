@@ -16,11 +16,11 @@ public class HourInfo
 
     [JsonPropertyName("condition")] public string Condition { get; set; }
 
-    [JsonPropertyName("cloudness")] public int Cloudness { get; set; }
+    [JsonPropertyName("cloudness")] public float Cloudness { get; set; }
 
     [JsonPropertyName("prec_type")] public int PrecType { get; set; }
 
-    [JsonPropertyName("prec_strength")] public int PrecStrength { get; set; }
+    [JsonPropertyName("prec_strength")] public float PrecStrength { get; set; }
 
     [JsonPropertyName("is_thunder")] public bool IsThunder { get; set; }
 
@@ -30,9 +30,9 @@ public class HourInfo
 
     [JsonPropertyName("wind_gust")] public double WindGust { get; set; }
 
-    [JsonPropertyName("pressure_mm")] public int PressureMm { get; set; }
+    [JsonPropertyName("pressure_mm")] public float PressureMm { get; set; }
 
-    [JsonPropertyName("pressure_pa")] public int PressurePa { get; set; }
+    [JsonPropertyName("pressure_pa")] public float PressurePa { get; set; }
 
     [JsonPropertyName("humidity")] public int Humidity { get; set; }
 
@@ -42,7 +42,7 @@ public class HourInfo
 
     [JsonPropertyName("soil_moisture")] public double SoilMoisture { get; set; }
 
-    [JsonPropertyName("prec_mm")] public int PrecMm { get; set; }
+    [JsonPropertyName("prec_mm")] public float PrecMm { get; set; }
 
     [JsonPropertyName("prec_period")] public int PrecPeriod { get; set; }
 

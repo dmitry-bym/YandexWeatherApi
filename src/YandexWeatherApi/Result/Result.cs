@@ -1,16 +1,14 @@
-﻿using System.Data;
-
-namespace YandexWeatherApi.Result;
+﻿namespace YandexWeatherApi.Result;
 
 public abstract class Result
 {
-    protected Result(bool success)
+    protected Result(bool isSuccess)
     {
-        Success = success;
+        IsSuccess = isSuccess;
     }
-    public bool Success { get; }
+    public bool IsSuccess { get; }
     
-    public bool Fail => !Success;
+    public bool IsFail => !IsSuccess;
 }
 
 public abstract class Result<T> : Result
@@ -19,7 +17,7 @@ public abstract class Result<T> : Result
     
     private readonly string? _error;
 
-    protected Result(T? data, string? error, bool success): base(success)
+    protected Result(T? data, string? error, bool isSuccess): base(isSuccess)
     {
         _data = data;
         _error = error;

@@ -6,10 +6,10 @@ public static class YandexWeatherApiDependencyInjectionExtensions
 {
     public static IServiceCollection AddYandexWeather(this IServiceCollection services, Action<YandexWeatherOptions> configureOptions)
     {
-        var weatherServiceBuilder = new YandexWeatherServiceBuilder()
+        var weatherServiceBuilder = YandexWeather.CreateBuilder()
             .Configure(configureOptions);
 
-        services.AddSingleton(weatherServiceBuilder.Build());
+        services.AddSingleton(_ => weatherServiceBuilder.Build());
         return services;
     }
 }

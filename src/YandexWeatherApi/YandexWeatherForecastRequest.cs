@@ -3,7 +3,7 @@ using YandexWeatherApi.Models.ForecastModels;
 
 namespace YandexWeatherApi;
 
-public sealed class YandexWeatherForecastRequest : YandexWeatherRequestBase<ForecastResponse>
+internal sealed class YandexWeatherForecastRequest : YandexWeatherRequestBase<ForecastResponse>, IYandexWeatherForecastRequest
 {
     protected override string WeatherType => "forecast";
     protected override string ApiVersion => "v2";
@@ -11,17 +11,24 @@ public sealed class YandexWeatherForecastRequest : YandexWeatherRequestBase<Fore
     internal YandexWeatherForecastRequest(IYandexWeatherClient weatherService) : base(weatherService)
     { }
 
-    public int? Limit { get; set; } = 1;
+    public int? Limit { get; set; }
 
-    public bool? Hours { get; set; } = true;
+    public bool? Hours { get; set; }
 
-    public bool? Extra { get; set; } = true;
-    
+    public bool? Extra { get; set; }
 
     protected override void FillRequestParams(IDictionary<string, string> dict)
     {
         dict.AddIfValueNotNull("limit", Limit);
-        dict.AddIfValueNotNull("hours", Hours);
-        dict.AddIfValueNotNull("extra", Extra);
+        dict.AddIfValueNotNull("hours", ConvertBool(Hours));
+        dict.AddIfValueNotNull("extra", ConvertBool(Extra));
+    }
+
+    private string? ConvertBool(bool? value)
+    {
+        if (!value.HasValue)
+            return null;
+        
+        return value.Value ? "true" : "false";
     }
 }

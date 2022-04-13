@@ -1,6 +1,6 @@
 ﻿namespace YandexWeatherApi;
 
-public class YandexWeatherRequest
+internal class YandexWeatherRequest
 {
     public YandexWeatherRequest(string apiVersion, string type, IDictionary<string, string> @params)
     {
