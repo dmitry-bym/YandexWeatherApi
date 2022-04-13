@@ -2,65 +2,164 @@
 
 namespace YandexWeatherApi.Models;
 
-public record Info(
-    [property: JsonPropertyName("lat")] double Lat,
-    [property: JsonPropertyName("lon")] double Lon,
-    [property: JsonPropertyName("url")] string Url
-);
+// Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
+    public class Info
+    {
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
 
-public record Fact(
-    [property: JsonPropertyName("temp")] int Temp,
-    [property: JsonPropertyName("feels_like")] int FeelsLike,
-    [property: JsonPropertyName("icon")] string Icon,
-    [property: JsonPropertyName("condition")] string Condition,
-    [property: JsonPropertyName("wind_speed")] int WindSpeed,
-    [property: JsonPropertyName("wind_gust")] double WindGust,
-    [property: JsonPropertyName("wind_dir")] string WindDir,
-    [property: JsonPropertyName("pressure_mm")] int PressureMm,
-    [property: JsonPropertyName("pressure_pa")] int PressurePa,
-    [property: JsonPropertyName("humidity")] int Humidity,
-    [property: JsonPropertyName("daytime")] string Daytime,
-    [property: JsonPropertyName("polar")] bool Polar,
-    [property: JsonPropertyName("season")] string Season,
-    [property: JsonPropertyName("obs_time")] int ObsTime
-);
+        [JsonPropertyName("lat")]
+        public double Lat { get; set; }
 
-public record Part(
-    [property: JsonPropertyName("part_name")] string PartName,
-    [property: JsonPropertyName("temp_min")] int TempMin,
-    [property: JsonPropertyName("temp_max")] int TempMax,
-    [property: JsonPropertyName("temp_avg")] int TempAvg,
-    [property: JsonPropertyName("feels_like")] int FeelsLike,
-    [property: JsonPropertyName("icon")] string Icon,
-    [property: JsonPropertyName("condition")] string Condition,
-    [property: JsonPropertyName("daytime")] string Daytime,
-    [property: JsonPropertyName("polar")] bool Polar,
-    [property: JsonPropertyName("wind_speed")] double WindSpeed,
-    [property: JsonPropertyName("wind_gust")] int WindGust,
-    [property: JsonPropertyName("wind_dir")] string WindDir,
-    [property: JsonPropertyName("pressure_mm")] int PressureMm,
-    [property: JsonPropertyName("pressure_pa")] int PressurePa,
-    [property: JsonPropertyName("humidity")] int Humidity,
-    [property: JsonPropertyName("prec_mm")] int PrecMm,
-    [property: JsonPropertyName("prec_period")] int PrecPeriod,
-    [property: JsonPropertyName("prec_prob")] int PrecProb
-);
+        [JsonPropertyName("lon")]
+        public double Lon { get; set; }
+    }
 
-public record Forecast(
-    [property: JsonPropertyName("date")] string Date,
-    [property: JsonPropertyName("date_ts")] int DateTs,
-    [property: JsonPropertyName("week")] int Week,
-    [property: JsonPropertyName("sunrise")] string Sunrise,
-    [property: JsonPropertyName("sunset")] string Sunset,
-    [property: JsonPropertyName("moon_code")] int MoonCode,
-    [property: JsonPropertyName("moon_text")] string MoonText,
-    [property: JsonPropertyName("parts")] IReadOnlyList<Part> Parts
-);
+    public class Fact
+    {
+        [JsonPropertyName("obs_time")]
+        public int ObsTime { get; set; }
 
-public record Informers(
-    [property: JsonPropertyName("now")] int Now,
-    [property: JsonPropertyName("now_dt")] DateTime NowDt,
-    [property: JsonPropertyName("info")] Info Info,
-    [property: JsonPropertyName("fact")] Fact Fact,
-    [property: JsonPropertyName("forecast")] Forecast Forecast
-);
+        [JsonPropertyName("temp")]
+        public int Temp { get; set; }
+
+        [JsonPropertyName("feels_like")]
+        public int FeelsLike { get; set; }
+
+        [JsonPropertyName("icon")]
+        public string Icon { get; set; }
+
+        [JsonPropertyName("condition")]
+        public string Condition { get; set; }
+
+        [JsonPropertyName("wind_speed")]
+        public double WindSpeed { get; set; }
+
+        [JsonPropertyName("wind_dir")]
+        public string WindDir { get; set; }
+
+        [JsonPropertyName("pressure_mm")]
+        public int PressureMm { get; set; }
+
+        [JsonPropertyName("pressure_pa")]
+        public int PressurePa { get; set; }
+
+        [JsonPropertyName("humidity")]
+        public int Humidity { get; set; }
+
+        [JsonPropertyName("daytime")]
+        public string Daytime { get; set; }
+
+        [JsonPropertyName("polar")]
+        public bool Polar { get; set; }
+
+        [JsonPropertyName("season")]
+        public string Season { get; set; }
+
+        [JsonPropertyName("wind_gust")]
+        public double WindGust { get; set; }
+    }
+
+    public class Part
+    {
+        [JsonPropertyName("part_name")]
+        public string PartName { get; set; }
+
+        [JsonPropertyName("temp_min")]
+        public int TempMin { get; set; }
+
+        [JsonPropertyName("temp_avg")]
+        public int TempAvg { get; set; }
+
+        [JsonPropertyName("temp_max")]
+        public int TempMax { get; set; }
+
+        [JsonPropertyName("wind_speed")]
+        public double WindSpeed { get; set; }
+
+        [JsonPropertyName("wind_gust")]
+        public double WindGust { get; set; }
+
+        [JsonPropertyName("wind_dir")]
+        public string WindDir { get; set; }
+
+        [JsonPropertyName("pressure_mm")]
+        public int PressureMm { get; set; }
+
+        [JsonPropertyName("pressure_pa")]
+        public int PressurePa { get; set; }
+
+        [JsonPropertyName("humidity")]
+        public int Humidity { get; set; }
+
+        [JsonPropertyName("prec_mm")]
+        public int PrecMm { get; set; }
+
+        [JsonPropertyName("prec_prob")]
+        public int PrecProb { get; set; }
+
+        [JsonPropertyName("prec_period")]
+        public int PrecPeriod { get; set; }
+
+        [JsonPropertyName("icon")]
+        public string Icon { get; set; }
+
+        [JsonPropertyName("condition")]
+        public string Condition { get; set; }
+
+        [JsonPropertyName("feels_like")]
+        public int FeelsLike { get; set; }
+
+        [JsonPropertyName("daytime")]
+        public string Daytime { get; set; }
+
+        [JsonPropertyName("polar")]
+        public bool Polar { get; set; }
+    }
+
+    public class Forecast
+    {
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("date_ts")]
+        public int DateTs { get; set; }
+
+        [JsonPropertyName("week")]
+        public int Week { get; set; }
+
+        [JsonPropertyName("sunrise")]
+        public string Sunrise { get; set; }
+
+        [JsonPropertyName("sunset")]
+        public string Sunset { get; set; }
+
+        [JsonPropertyName("moon_code")]
+        public int MoonCode { get; set; }
+
+        [JsonPropertyName("moon_text")]
+        public string MoonText { get; set; }
+
+        [JsonPropertyName("parts")]
+        public List<Part> Parts { get; set; }
+    }
+
+    public class Informers
+    {
+        [JsonPropertyName("now")]
+        public int Now { get; set; }
+
+        [JsonPropertyName("now_dt")]
+        public DateTime NowDt { get; set; }
+
+        [JsonPropertyName("info")]
+        public Info Info { get; set; }
+
+        [JsonPropertyName("fact")]
+        public Fact Fact { get; set; }
+
+        [JsonPropertyName("forecast")]
+        public Forecast Forecast { get; set; }
+    }
+
+

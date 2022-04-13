@@ -7,6 +7,7 @@ internal class YandexWeatherService : IYandexWeatherService, IYandexWeatherClien
     private readonly IHttpClientFactory _clientFactory;
     private readonly WeatherServiceSettings _serviceSettings;
     private const string ApiKeyHeaderName = "X-Yandex-API-Key";
+
     internal YandexWeatherService(IHttpClientFactory clientFactory, WeatherServiceSettings serviceSettings)
     {
         _clientFactory = clientFactory;
@@ -28,19 +29,20 @@ internal class YandexWeatherService : IYandexWeatherService, IYandexWeatherClien
     {
         using var client = _clientFactory.CreateClient();
         client.DefaultRequestHeaders.Add(ApiKeyHeaderName, _serviceSettings.ApiKey);
-        
+
         using var response = await client.GetAsync(CreateUri(request), ct).ConfigureAwait(false);
-        var stream = await response.Content.ReadAsStreamAsync(ct).ConfigureAwait(false);
+        var stream = await response.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
             return new ErrorResult<TResponse>("error"); //todo
-        
+
         var data = JsonSerializer.Deserialize<TResponse>(stream)!;
         return new SuccessResult<TResponse>(data);
     }
 
     private string CreateUri(IWeatherRequest request)
     {
-        //todo
-        return "";
+        var parameters = request.Params.Select(x => $"{x.Item1}={x.Item2}").StringJoin('&');
+
+        return $"https://api.weather.yandex.ru/{request.ApiVersion}/{request.Type}?{parameters}";
     }
 }
