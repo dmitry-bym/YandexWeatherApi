@@ -2,13 +2,9 @@
 
 public interface IWeatherRequest
 {
-    public string ApiVersion { get; }
+    string ApiVersion { get; }
     
-    public string Type { get; }
+    string Type { get; }
     
-    public IEnumerable<(string, string)> Params { get; }
-}
-
-public interface IWeatherRequest<T> : IWeatherRequest
-{
+    IEnumerable<(string, string)> Params { get; }
 }

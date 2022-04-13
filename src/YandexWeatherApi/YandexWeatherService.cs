@@ -2,12 +2,12 @@ using System.Text.Json;
 
 namespace YandexWeatherApi;
 
-public class YandexWeatherService : IYandexWeatherService
+internal class YandexWeatherService : IYandexWeatherService, IYandexWeatherClient
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly WeatherServiceSettings _serviceSettings;
     private const string ApiKeyHeaderName = "X-Yandex-API-Key";
-    public YandexWeatherService(IHttpClientFactory clientFactory, WeatherServiceSettings serviceSettings)
+    internal YandexWeatherService(IHttpClientFactory clientFactory, WeatherServiceSettings serviceSettings)
     {
         _clientFactory = clientFactory;
         _serviceSettings = serviceSettings;
@@ -20,9 +20,10 @@ public class YandexWeatherService : IYandexWeatherService
 
     public void Forecast()
     {
-        //todo
+        //todo implement forecast request
     }
 
+    //todo move to sender or client
     public async Task<Result<TResponse>> Send<TResponse>(IWeatherRequest request, CancellationToken ct)
     {
         using var client = _clientFactory.CreateClient();

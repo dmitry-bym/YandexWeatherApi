@@ -46,13 +46,13 @@ public class YandexWeatherServiceBuilder
         return this;
     }
 
-    public YandexWeatherService Build()
+    public IYandexWeatherService Build()
     {
         Validate();
         return new YandexWeatherService(_options.ClientFactory ?? new ClientFactory(new HttpClient()), new WeatherServiceSettings(_options.ApiKey!));
     }
     
-    private void Validate()
+    public void Validate()
     {
         if (string.IsNullOrEmpty(_options.ApiKey))
             throw new ValidationException(); //todo correct exception

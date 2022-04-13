@@ -4,8 +4,8 @@ namespace YandexWeatherApi;
 
 public sealed class YandexWeatherInformersRequestBuilder
 {
-    private readonly YandexWeatherService _weatherService;
-    internal YandexWeatherInformersRequestBuilder(YandexWeatherService weatherService)
+    private readonly IYandexWeatherClient _weatherService;
+    internal YandexWeatherInformersRequestBuilder(IYandexWeatherClient weatherService)
     {
         _weatherService = weatherService;
     }
@@ -27,8 +27,7 @@ public sealed class YandexWeatherInformersRequestBuilder
     
     private IWeatherRequest CreateRequest()
     {
-        var parameters = GetRequestParams();
-        return new YandexWeatherRequest(ApiVersion, WeatherType, parameters);
+        return new YandexWeatherRequest(ApiVersion, WeatherType, GetRequestParams());
     }
     
     private IEnumerable<(string Name, string Value)> GetRequestParams()

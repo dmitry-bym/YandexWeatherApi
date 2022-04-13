@@ -1,6 +1,4 @@
-﻿using YandexWeatherApi.Models;
-
-namespace YandexWeatherApi;
+﻿namespace YandexWeatherApi;
 
 public class YandexWeatherRequest : IWeatherRequest
 {
