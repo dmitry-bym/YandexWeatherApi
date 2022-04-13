@@ -1,16 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.Logging;
 
 namespace YandexWeatherApi;
-
-public class YandexWeatherOptions
-{
-    public string? ApiKey { get; set; }
-    
-    public ILogger? Logger { get; set; }
-    
-    public IHttpClientFactory? ClientFactory { get; set; }
-}
 
 public class YandexWeatherServiceBuilder
 {
@@ -22,53 +12,26 @@ public class YandexWeatherServiceBuilder
         return this;
     }
 
-    public YandexWeatherServiceBuilder UseHttpClient(HttpClient client)
+    public IYandexWeatherRequestCreator Build()
     {
-        if (_options.ClientFactory is not null)
-            throw new ArgumentException("Client already configured.", nameof(client));
+        if (_options.ClientFactory is null && _options.Client is null)
+            _options.Client = new HttpClient();
         
-        _options.ClientFactory = new ClientFactory(client);
-        return this;
-    }
-    
-    public YandexWeatherServiceBuilder UseHttpClientFactory(IHttpClientFactory clientFactory)
-    {
-        if (_options.ClientFactory is not null)
-            throw new ArgumentException("Client already configured.", nameof(clientFactory));
-        
-        _options.ClientFactory = clientFactory;
-        return this;
-    }
-    
-    public YandexWeatherServiceBuilder UseApiKey(string apiKey)
-    {
-        _options.ApiKey = apiKey;
-        return this;
+        Validate();
+        return new YandexWeatherRequestCreator(CreateClient());
     }
 
-    public IYandexWeatherService Build()
+    private IYandexWeatherClient CreateClient()
     {
-        Validate();
-        return new YandexWeatherService(_options.ClientFactory ?? new ClientFactory(new HttpClient()), new WeatherServiceSettings(_options.ApiKey!));
+        return new YandexWeatherClient(_options);
     }
     
     public void Validate()
     {
         if (string.IsNullOrEmpty(_options.ApiKey))
-            throw new ValidationException(); //todo correct exception
-    }
+            throw new ValidationException();
 
-    private class ClientFactory : IHttpClientFactory
-    {
-        private readonly HttpClient _client;
-
-        public ClientFactory(HttpClient client)
-        {
-            _client = client;
-        }
-        public HttpClient CreateClient(string name)
-        {
-            return _client;
-        }
+        if (_options.ClientFactory is not null && _options.Client is not null)
+            throw new ValidationException();
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace YandexWeatherApi;
 
-public class YandexWeatherRequest : IWeatherRequest
+public class YandexWeatherRequest
 {
-    public YandexWeatherRequest(string apiVersion, string type, IEnumerable<(string, string)> @params)
+    public YandexWeatherRequest(string apiVersion, string type, IDictionary<string, string> @params)
     {
         ApiVersion = apiVersion;
         Type = type;
@@ -11,5 +11,5 @@ public class YandexWeatherRequest : IWeatherRequest
 
     public string ApiVersion { get; }
     public string Type { get; }
-    public IEnumerable<(string, string)> Params { get; }
+    public IDictionary<string, string> Params { get; }
 }
