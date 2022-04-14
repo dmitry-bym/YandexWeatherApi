@@ -4,7 +4,7 @@ namespace YandexWeatherApi.Models.ForecastModels;
 
 public class Part
 {
-    [JsonPropertyName("_source")] public string Source { get; set; }
+    [JsonPropertyName("_source")] public string? Source { get; set; }
 
     [JsonPropertyName("temp_min")] public int TempMin { get; set; }
 
@@ -16,7 +16,7 @@ public class Part
 
     [JsonPropertyName("wind_gust")] public double WindGust { get; set; }
 
-    [JsonPropertyName("wind_dir")] public string WindDir { get; set; }
+    [JsonPropertyName("wind_dir")] public string? WindDir { get; set; }
 
     [JsonPropertyName("pressure_mm")] public float PressureMm { get; set; }
 
@@ -40,15 +40,15 @@ public class Part
 
     [JsonPropertyName("prec_strength")] public float PrecStrength { get; set; }
 
-    [JsonPropertyName("icon")] public string Icon { get; set; }
+    [JsonPropertyName("icon")] public string? Icon { get; set; }
 
-    [JsonPropertyName("condition")] public string Condition { get; set; }
+    [JsonPropertyName("condition")] public string? Condition { get; set; }
 
     [JsonPropertyName("uv_index")] public int UvIndex { get; set; }
 
     [JsonPropertyName("feels_like")] public int FeelsLike { get; set; }
 
-    [JsonPropertyName("daytime")] public string Daytime { get; set; }
+    [JsonPropertyName("daytime")] public string? Daytime { get; set; }
 
     [JsonPropertyName("polar")] public bool Polar { get; set; }
 }

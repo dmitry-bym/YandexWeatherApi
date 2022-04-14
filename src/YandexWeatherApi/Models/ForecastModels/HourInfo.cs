@@ -4,7 +4,7 @@ namespace YandexWeatherApi.Models.ForecastModels;
 
 public class HourInfo
 {
-    [JsonPropertyName("hour")] public string Hour { get; set; }
+    [JsonPropertyName("hour")] public string? Hour { get; set; }
 
     [JsonPropertyName("hour_ts")] public int HourTs { get; set; }
 
@@ -12,9 +12,9 @@ public class HourInfo
 
     [JsonPropertyName("feels_like")] public int FeelsLike { get; set; }
 
-    [JsonPropertyName("icon")] public string Icon { get; set; }
+    [JsonPropertyName("icon")] public string? Icon { get; set; }
 
-    [JsonPropertyName("condition")] public string Condition { get; set; }
+    [JsonPropertyName("condition")] public string? Condition { get; set; }
 
     [JsonPropertyName("cloudness")] public float Cloudness { get; set; }
 
@@ -24,7 +24,7 @@ public class HourInfo
 
     [JsonPropertyName("is_thunder")] public bool IsThunder { get; set; }
 
-    [JsonPropertyName("wind_dir")] public string WindDir { get; set; }
+    [JsonPropertyName("wind_dir")] public string? WindDir { get; set; }
 
     [JsonPropertyName("wind_speed")] public double WindSpeed { get; set; }
 
