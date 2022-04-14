@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -11,17 +12,18 @@ internal class YandexWeatherClient : IYandexWeatherClient
     private readonly HttpClient? _client;
     private readonly ILogger? _logger;
     private readonly string _apiKey;
-
+    
     private const string ApiKeyHeaderName = "X-Yandex-API-Key";
     private static readonly Uri BaseUrl = new("https://api.weather.yandex.ru");
-    internal YandexWeatherClient(YandexWeatherOptions serviceSettings)
+    internal YandexWeatherClient(IHttpClientFactory? clientFactory, HttpClient? client, ILogger? logger, string apiKey)
     {
-        _logger = serviceSettings.Logger;
-        _clientFactory = serviceSettings.ClientFactory;
-        _apiKey = serviceSettings.ApiKey!;
-        _client = serviceSettings.Client;
+        _logger = logger;
+        _client = client;
+        _clientFactory = clientFactory;
+        _apiKey = apiKey;
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
     public Task<Result<TResponse>> Send<TResponse>(YandexWeatherRequest request, CancellationToken ct)
     {
         return (_clientFactory, _client) switch
@@ -47,6 +49,7 @@ internal class YandexWeatherClient : IYandexWeatherClient
     private async Task<Result<TResponse>> SendInternal<TResponse>(HttpClient client, YandexWeatherRequest request, CancellationToken ct)
     {
         client.DefaultRequestHeaders.Add(ApiKeyHeaderName, _apiKey);
+        
         using var response = await client.GetAsync(CreateUri(request), ct).ConfigureAwait(false);
         await using var str = await response.Content.ReadAsStreamAsync(ct).ConfigureAwait(false);
 

@@ -9,4 +9,4 @@ namespace YandexWeatherApi;
 /// <param name="Longitude">
 /// The longitude in degrees.
 /// </param>
-public record WeatherLocality(string Latitude, string Longitude);
+public record WeatherLocality(decimal Latitude, decimal Longitude);

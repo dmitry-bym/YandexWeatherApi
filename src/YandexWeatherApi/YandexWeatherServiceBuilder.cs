@@ -7,8 +7,9 @@ public class YandexWeatherServiceBuilder
     private readonly YandexWeatherOptions _options = new();
 
     internal YandexWeatherServiceBuilder()
-    { }
-    
+    {
+    }
+
     public YandexWeatherServiceBuilder Configure(Action<YandexWeatherOptions> configureOptions)
     {
         configureOptions(_options);
@@ -17,16 +18,20 @@ public class YandexWeatherServiceBuilder
 
     public IYandexWeatherRequestCreator Build()
     {
-        if (_options.ClientFactory is null && _options.Client is null)
-            _options.Client = new HttpClient();
-        
+        ConfigureDefault();
         Validate();
         return new YandexWeatherRequestCreator(CreateClient());
     }
 
+    private void ConfigureDefault()
+    {
+        if (_options.ClientFactory is null && _options.Client is null)
+            _options.Client = new HttpClient();
+    }
+
     private IYandexWeatherClient CreateClient()
     {
-        return new YandexWeatherClient(_options);
+        return new YandexWeatherClient(_options.ClientFactory, _options.Client, _options.Logger, _options.ApiKey!);
     }
 
     private void Validate()

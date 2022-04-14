@@ -2,39 +2,39 @@ namespace YandexWeatherApi.Extensions;
 
 public static class YandexWeatherRequestExtensions
 {
-    public static T WithLocality<T>(this T builder, WeatherLocality locality) where T : IYandexWeatherRequestBase
+    public static T WithLocality<T>(this T request, WeatherLocality locality) where T : IYandexWeatherRequestBase
     {
-        builder.WeatherLocality = locality;
-        return builder;
+        request.WeatherLocality = locality;
+        return request;
     }
 
-    public static T WithLocality<T>(this T builder, string latitude, string longitude) where T : IYandexWeatherRequestBase
+    public static T WithLocality<T>(this T request, decimal latitude, decimal longitude) where T : IYandexWeatherRequestBase
     {
-        builder.WeatherLocality = new WeatherLocality(latitude, longitude);
-        return builder;
+        request.WeatherLocality = new WeatherLocality(latitude, longitude);
+        return request;
     }
 
-    public static T WithLocale<T>(this T builder, WeatherLocale locale) where T : IYandexWeatherRequestBase
+    public static T WithLocale<T>(this T request, WeatherLocale locale) where T : IYandexWeatherRequestBase
     {
-        builder.WeatherLocale = locale;
-        return builder;
+        request.WeatherLocale = locale;
+        return request;
     }
 
-    public static T WithLimit<T>(this T builder, int limit) where T : IYandexWeatherForecastRequest
+    public static T WithLimit<T>(this T request, int limit) where T : IYandexWeatherForecastRequest
     {
-        builder.Limit = limit;
-        return builder;
+        request.Limit = limit;
+        return request;
     }
 
-    public static T Extra<T>(this T builder, bool extra = true) where T : IYandexWeatherForecastRequest
+    public static T Extra<T>(this T request, bool extra = true) where T : IYandexWeatherForecastRequest
     {
-        builder.Extra = extra;
-        return builder;
+        request.Extra = extra;
+        return request;
     }
 
-    public static T Hours<T>(this T builder, bool hours = true) where T : IYandexWeatherForecastRequest
+    public static T Hours<T>(this T request, bool hours = true) where T : IYandexWeatherForecastRequest
     {
-        builder.Extra = hours;
-        return builder;
+        request.Extra = hours;
+        return request;
     }
 }

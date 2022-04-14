@@ -17,5 +17,10 @@ public interface IYandexWeatherRequestBase
 
 public interface IYandexWeatherRequestBase<TResponse> : IYandexWeatherRequestBase
 {
+    /// <summary>
+    /// Make and send request to Yandex Weather api.
+    /// </summary>
+    /// <param name="ct">Cancellation token.</param>
+    /// <returns>Result of request. Contains success value or error.</returns>
     Task<Result<TResponse>> Send(CancellationToken ct);
 }

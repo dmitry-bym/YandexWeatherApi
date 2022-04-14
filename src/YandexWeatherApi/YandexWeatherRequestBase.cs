@@ -48,20 +48,12 @@ internal abstract class YandexWeatherRequestBase<TResponse> : IYandexWeatherRequ
     {
         if (WeatherLocality is null)
             throw new NotImplementedException();
-
-        if (string.IsNullOrEmpty(WeatherLocality.Latitude))
-            throw new NotImplementedException();
-
-        if (string.IsNullOrEmpty(WeatherLocality.Longitude))
-            throw new NotImplementedException();
     }
 
-    //aggresive inlining
     protected virtual void FillRequestParams(IDictionary<string, string> dict)
     {
     }
 
-    //aggresive inlining
     protected virtual void ValidateInner()
     {
     }

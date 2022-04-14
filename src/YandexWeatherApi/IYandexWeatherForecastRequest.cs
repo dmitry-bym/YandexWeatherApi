@@ -5,17 +5,17 @@ namespace YandexWeatherApi;
 public interface IYandexWeatherForecastRequest : IYandexWeatherRequestBase<ForecastResponse>
 {
     /// <summary>
-    /// . Optional.
+    /// The number of days in the forecast, including the current day. Optional.
     /// </summary>
     int? Limit { get; set; }
     
     /// <summary>
-    /// . Optional.
+    /// For each day, the response will contain the hourly weather forecast. Optional. (true by default)
     /// </summary>
     bool? Hours { get; set; }
     
     /// <summary>
-    /// . Optional.
+    /// Extra information about precipitation. Optional. (false by default)
     /// </summary>
     bool? Extra { get; set; }
 }
