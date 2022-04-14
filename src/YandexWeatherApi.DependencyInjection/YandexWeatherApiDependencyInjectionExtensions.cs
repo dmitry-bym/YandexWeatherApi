@@ -36,7 +36,7 @@ public static class YandexWeatherApiDependencyInjectionExtensions
         switch (settings.Client, settings.ClientFactory)
         {
             case ({ }, { }):
-                throw new NotImplementedException();
+                 break;
             case (_, { }):
                 builder.UseHttpClientFactory(settings.ClientFactory);
                 break;
