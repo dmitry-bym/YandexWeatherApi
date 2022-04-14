@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+using YandexWeatherApi.Exceptions;
 
 namespace YandexWeatherApi;
 
-public class YandexWeatherServiceBuilder
+internal class YandexWeatherServiceBuilder : IYandexWeatherServiceBuilder
 {
     private readonly YandexWeatherOptions _options = new();
 
@@ -10,7 +10,7 @@ public class YandexWeatherServiceBuilder
     {
     }
 
-    public YandexWeatherServiceBuilder Configure(Action<YandexWeatherOptions> configureOptions)
+    public IYandexWeatherServiceBuilder Configure(Action<YandexWeatherOptions> configureOptions)
     {
         configureOptions(_options);
         return this;
@@ -36,10 +36,10 @@ public class YandexWeatherServiceBuilder
 
     private void Validate()
     {
-        if (string.IsNullOrEmpty(_options.ApiKey))
-            throw new ValidationException();
+        if (string.IsNullOrWhiteSpace(_options.ApiKey))
+            throw new YandexWeatherApiValidationException("Can not be null or empty", nameof(_options.ApiKey), "***");
 
         if (_options.ClientFactory is not null && _options.Client is not null)
-            throw new ValidationException();
+            throw new YandexWeatherApiConflictException($"Unable to use {nameof(_options.ClientFactory)} and {nameof(_options.Client)} together");
     }
 }

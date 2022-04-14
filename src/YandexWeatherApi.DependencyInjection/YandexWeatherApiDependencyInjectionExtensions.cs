@@ -9,14 +9,14 @@ public static class YandexWeatherApiDependencyInjectionExtensions
     {
         return services.AddYandexWeather((_, settings) => configureOptions(settings));
     }
-    
+
     public static IServiceCollection AddYandexWeather(this IServiceCollection services, Action<IServiceProvider, YandexWeatherSettings> configureOptions)
     {
         services.AddSingleton(provider =>
         {
             var weatherSettings = new YandexWeatherSettings();
             configureOptions(provider, weatherSettings);
-            
+
             var builder = YandexWeather.CreateBuilder()
                 .RegisterClient(provider, weatherSettings)
                 .Configure(x =>
@@ -24,19 +24,19 @@ public static class YandexWeatherApiDependencyInjectionExtensions
                     x.Logger = weatherSettings.Logger;
                     x.ApiKey = weatherSettings.ApiKey;
                 });
-            
+
             return builder.Build();
         });
-        
+
         return services;
     }
 
-    private static YandexWeatherServiceBuilder RegisterClient(this YandexWeatherServiceBuilder builder, IServiceProvider serviceProvider, YandexWeatherSettings settings)
+    private static IYandexWeatherServiceBuilder RegisterClient(this IYandexWeatherServiceBuilder builder, IServiceProvider serviceProvider, YandexWeatherSettings settings)
     {
         switch (settings.Client, settings.ClientFactory)
         {
             case ({ }, { }):
-                 break;
+                break;
             case (_, { }):
                 builder.UseHttpClientFactory(settings.ClientFactory);
                 break;
@@ -49,7 +49,7 @@ public static class YandexWeatherApiDependencyInjectionExtensions
                     builder.UseHttpClientFactory(factory);
                 break;
         }
-        
+
         return builder;
     }
 }

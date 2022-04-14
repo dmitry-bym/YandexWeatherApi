@@ -1,3 +1,5 @@
+using System.Globalization;
+using YandexWeatherApi.Exceptions;
 using YandexWeatherApi.Helpers;
 using YandexWeatherApi.Result;
 
@@ -37,8 +39,8 @@ internal abstract class YandexWeatherRequestBase<TResponse> : IYandexWeatherRequ
     private IDictionary<string, string> GetRequestParams()
     {
         var dict = new Dictionary<string, string>();
-        dict.AddIfValueNotNull("lat", WeatherLocality!.Latitude);
-        dict.AddIfValueNotNull("lon", WeatherLocality!.Longitude);
+        dict.AddIfValueNotNull("lat", WeatherLocality!.Latitude.ToString(CultureInfo.InvariantCulture));
+        dict.AddIfValueNotNull("lon", WeatherLocality!.Longitude.ToString(CultureInfo.InvariantCulture));
         dict.AddIfValueNotNull("lang", WeatherLocale?.Locale);
         FillRequestParams(dict);
         return dict;
@@ -47,14 +49,10 @@ internal abstract class YandexWeatherRequestBase<TResponse> : IYandexWeatherRequ
     private void Validate()
     {
         if (WeatherLocality is null)
-            throw new NotImplementedException();
+            throw new YandexWeatherApiValidationException("invalid value", nameof(WeatherLocality), WeatherLocality);
     }
 
     protected virtual void FillRequestParams(IDictionary<string, string> dict)
-    {
-    }
-
-    protected virtual void ValidateInner()
     {
     }
 }

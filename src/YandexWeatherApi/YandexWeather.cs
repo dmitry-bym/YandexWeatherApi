@@ -5,8 +5,8 @@ public static class YandexWeather
     /// <summary>
     /// Create new instance of <c>YandexWeatherServiceBuilder</c>
     /// </summary>
-    public static YandexWeatherServiceBuilder CreateBuilder()
+    public static IYandexWeatherServiceBuilder CreateBuilder()
     {
-        return new();
+        return new YandexWeatherServiceBuilder();
     }
 }

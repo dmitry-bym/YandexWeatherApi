@@ -34,7 +34,7 @@ public static class YandexWeatherRequestExtensions
 
     public static T Hours<T>(this T request, bool hours = true) where T : IYandexWeatherForecastRequest
     {
-        request.Extra = hours;
+        request.Hours = hours;
         return request;
     }
 }

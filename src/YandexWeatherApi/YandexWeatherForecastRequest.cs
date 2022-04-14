@@ -19,12 +19,12 @@ internal sealed class YandexWeatherForecastRequest : YandexWeatherRequestBase<Fo
 
     protected override void FillRequestParams(IDictionary<string, string> dict)
     {
-        dict.AddIfValueNotNull("limit", Limit);
+        dict.AddIfValueNotNull("limit", Limit.ToString());
         dict.AddIfValueNotNull("hours", ConvertBool(Hours));
         dict.AddIfValueNotNull("extra", ConvertBool(Extra));
     }
 
-    private string? ConvertBool(bool? value)
+    private string? ConvertBool(bool? value) //todo move to helper
     {
         if (!value.HasValue)
             return null;

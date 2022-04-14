@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using YandexWeatherApi.Exceptions;
 using YandexWeatherApi.Result;
 
 namespace YandexWeatherApi;
@@ -17,6 +18,12 @@ internal class YandexWeatherClient : IYandexWeatherClient
     private static readonly Uri BaseUrl = new("https://api.weather.yandex.ru");
     internal YandexWeatherClient(IHttpClientFactory? clientFactory, HttpClient? client, ILogger? logger, string apiKey)
     {
+        if (clientFactory is not null && client is not null)
+            throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together");
+
+        if (clientFactory is null && client is null)
+            throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request");
+        
         _logger = logger;
         _client = client;
         _clientFactory = clientFactory;
@@ -28,10 +35,10 @@ internal class YandexWeatherClient : IYandexWeatherClient
     {
         return (_clientFactory, _client) switch
         {
-            ({ }, { }) => throw new NotImplementedException(), //todo
+            ({ }, { }) => throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together"),
             (_, { }) => SendClient<TResponse>(request, ct),
             ({ }, _) => SendFactory<TResponse>(request, ct),
-            _ => throw new NotImplementedException()
+            _ => throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request")
         };
     }
 
@@ -63,7 +70,7 @@ internal class YandexWeatherClient : IYandexWeatherClient
         return new SuccessResult<TResponse>(data);
     }
 
-    private string CreateUri(YandexWeatherRequest request)
+    private string CreateUri(YandexWeatherRequest request) //todo move to uri helper
     {
         var uriBuilder = new UriBuilder(BaseUrl)
         {

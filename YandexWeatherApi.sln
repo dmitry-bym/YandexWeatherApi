@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexWeatherApi", "src\Yan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexWeatherApi.DependencyInjection", "src\YandexWeatherApi.DependencyInjection\YandexWeatherApi.DependencyInjection.csproj", "{FD08E3FD-EC3C-4447-AF2E-77294402486B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexWeatherApi.Tests.Unit", "tests\YandexWeatherApi.Tests.Unit\YandexWeatherApi.Tests.Unit.csproj", "{133ECECE-44E9-4136-AFA9-8243618A7ACE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{FD08E3FD-EC3C-4447-AF2E-77294402486B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD08E3FD-EC3C-4447-AF2E-77294402486B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD08E3FD-EC3C-4447-AF2E-77294402486B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{133ECECE-44E9-4136-AFA9-8243618A7ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133ECECE-44E9-4136-AFA9-8243618A7ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133ECECE-44E9-4136-AFA9-8243618A7ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133ECECE-44E9-4136-AFA9-8243618A7ACE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
