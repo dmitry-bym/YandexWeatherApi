@@ -6,11 +6,10 @@ on:
     
 jobs:
   build-test-pack:
-    if: startsWith(${{ github.event.release.name }}, 'di:') == true
+
     runs-on: ubuntu-latest
+
     steps:
-    - run: echo "Name:${{ github.event.release.name }}"
-    
     - name: Checkout
       uses: actions/checkout@v2
         
@@ -24,4 +23,11 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration Release
       
     - name: Pack
-      run: dotnet pack ./src/YandexWeatherApi/YandexWeatherApi.csproj --output nupkgs --no-build --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }}
+      run: |
+        dotnet pack ./src/YandexWeatherApi/YandexWeatherApi.csproj --output nupkgs --no-build --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }}
+        dotnet pack ./src/YandexWeatherApi.DependencyInjection/YandexWeatherApi.DependencyInjection.csproj --output nupkgs --no-build --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }}
+
+    - name: Push
+      run: |
+        dotnet nuget push ./nupkgs/YandexWeatherApi.${{ github.event.release.tag_name }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push ./nupkgs/YandexWeatherApi.DependencyInjection.${{ github.event.release.tag_name }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
