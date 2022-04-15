@@ -78,3 +78,11 @@ After registration just resolve `IYandexWeatherRequestCreator`
         return a.Data;
     }
 ```
+
+## License
+
+Authored by: Dmitry Kaznacheev (dmitry-bym)
+
+This project is under MIT license. You can obtain the license copy [here](https://github.com/dmitry-bym/YandexWeatherApi/blob/master/LICENSE).
+
+This work based on Yandex.Weather API: https://yandex.com/dev/weather
