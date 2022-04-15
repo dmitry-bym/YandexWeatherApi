@@ -19,16 +19,8 @@ internal sealed class YandexWeatherForecastRequest : YandexWeatherRequestBase<Fo
 
     protected override void FillRequestParams(IDictionary<string, string> dict)
     {
-        dict.AddIfValueNotNull("limit", Limit.ToString());
-        dict.AddIfValueNotNull("hours", ConvertBool(Hours));
-        dict.AddIfValueNotNull("extra", ConvertBool(Extra));
-    }
-
-    private string? ConvertBool(bool? value) //todo move to helper
-    {
-        if (!value.HasValue)
-            return null;
-        
-        return value.Value ? "true" : "false";
+        dict.AddIfValueNotNull("limit", StringConverter.Convert(Limit));
+        dict.AddIfValueNotNull("hours", StringConverter.Convert(Hours));
+        dict.AddIfValueNotNull("extra", StringConverter.Convert(Extra));
     }
 }

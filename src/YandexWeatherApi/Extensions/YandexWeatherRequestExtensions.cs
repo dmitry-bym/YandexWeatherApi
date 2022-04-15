@@ -8,7 +8,7 @@ public static class YandexWeatherRequestExtensions
         return request;
     }
 
-    public static T WithLocality<T>(this T request, decimal latitude, decimal longitude) where T : IYandexWeatherRequestBase
+    public static T WithLocality<T>(this T request, double latitude, double longitude) where T : IYandexWeatherRequestBase
     {
         request.WeatherLocality = new WeatherLocality(latitude, longitude);
         return request;

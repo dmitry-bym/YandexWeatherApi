@@ -39,8 +39,8 @@ internal abstract class YandexWeatherRequestBase<TResponse> : IYandexWeatherRequ
     private IDictionary<string, string> GetRequestParams()
     {
         var dict = new Dictionary<string, string>();
-        dict.AddIfValueNotNull("lat", WeatherLocality!.Latitude.ToString(CultureInfo.InvariantCulture));
-        dict.AddIfValueNotNull("lon", WeatherLocality!.Longitude.ToString(CultureInfo.InvariantCulture));
+        dict.AddIfValueNotNull("lat", StringConverter.Convert(WeatherLocality!.Latitude));
+        dict.AddIfValueNotNull("lon", StringConverter.Convert(WeatherLocality!.Longitude));
         dict.AddIfValueNotNull("lang", WeatherLocale?.Locale);
         FillRequestParams(dict);
         return dict;

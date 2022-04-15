@@ -51,7 +51,7 @@ public class YandexWeatherForecastRequestTests
                 Assert.Equal("forecast", request.Type);
                 Assert.Equal("v2", request.ApiVersion);
                 Assert.True(request.Params.Count == 4);
-                Assert.Equal("12", request.Params["lat"]);
+                Assert.Equal("12.01", request.Params["lat"]);
                 Assert.Equal("12", request.Params["lon"]);
                 Assert.Equal("12", request.Params["limit"]);
                 Assert.Equal(WeatherLocale.ru_UA.Locale, request.Params["lang"]);
@@ -59,7 +59,7 @@ public class YandexWeatherForecastRequestTests
         
         await builder
             .WithLimit(12)
-            .WithLocality(12, 12)
+            .WithLocality(12.01, 12)
             .WithLocale(WeatherLocale.ru_UA)
             .Send(CancellationToken.None);
         
