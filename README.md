@@ -1,7 +1,7 @@
 # YandexWeatherApi
 Wrapper for Yandex Weather API.
 
-## Create a request
+### Create a request
 
 ```c#
 var request = YandexWeather.CreateBuilder()
@@ -36,4 +36,24 @@ var data = result.Data;                      //throw if error
 var dataOrDefault = result.DataOrDefault;    //null if error
 var error = result.Error;                    //throw if success 
 var errorOrDefault = result.ErrorOrDefault;   //null if success 
+```
+
+## YandexWeatherApi.DependencyInjection
+
+```c#
+    builder.Services.AddYandexWeather(options =>
+    {
+        options.ClientFactory = factory
+        options.Logger = loger
+        options.Client = client
+        options.ApiKey = "key";
+    });
+```
+Or you can use service provider to resolve dependencies
+```c#
+    builder.Services.AddYandexWeather((provider, options) =>
+    {
+        options.ClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+        options.ApiKey = "key";
+    });
 ```
