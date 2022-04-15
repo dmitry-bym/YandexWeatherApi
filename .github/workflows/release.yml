@@ -1,0 +1,26 @@
+name: Publish Nuget package
+
+on:
+  release:
+    types: [published]
+    
+jobs:
+  build-test-pack:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Name:${{ github.event.release.name }}"
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration Release
+      
+    - name: Pack
+      run: dotnet pack ./src/YandexWeatherApi/YandexWeatherApi.csproj --output nupkgs --no-build --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }}
