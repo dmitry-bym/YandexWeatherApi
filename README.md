@@ -4,7 +4,7 @@ Wrapper for Yandex Weather API.
 ## Create a request
 
 ```c#
-var request = new YandexWeatherServiceBuilder()
+var request = YandexWeather.CreateBuilder()
     .UseApiKey("your api key")
     .Build()
     .Forecast(); // or Informers()
