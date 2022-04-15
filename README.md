@@ -1,5 +1,7 @@
-# YandexWeatherApi
-Wrapper for Yandex Weather API.
+# YandexWeatherApi C# wrapper
+| YandexWeatherApi |  [![nuget](https://img.shields.io/nuget/v/YandexWeatherApi?style=flat-square)](https://www.nuget.org/packages/YandexWeatherApi) [![downloads](https://img.shields.io/nuget/dt/YandexWeatherApi?style=flat-square)](https://www.nuget.org/packages/YandexWeatherApi) [![lisence](https://img.shields.io/badge/lisence-MIT-green?style=flat-square)](https://github.com/dmitry-bym/YandexWeatherApi/blob/master/LICENSE) |
+| ------------- |:-------------:|
+| __YandexWeatherApi.DependencyInjection__ | [![nuget](https://img.shields.io/nuget/v/YandexWeatherApi.DependencyInjection?style=flat-square)](https://www.nuget.org/packages/YandexWeatherApi.DependencyInjection) [![downloads](https://img.shields.io/nuget/dt/YandexWeatherApi.DependencyInjection?style=flat-square)](https://www.nuget.org/packages/YandexWeatherApi.DependencyInjection) [![lisence](https://img.shields.io/badge/lisence-MIT-green?style=flat-square)](https://github.com/dmitry-bym/YandexWeatherApi/blob/master/LICENSE) |
 
 ### Create a request
 
