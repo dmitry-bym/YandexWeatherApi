@@ -22,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\YandexWeatherApi.DependencyInjection\YandexWeatherApi.DependencyInjection.csproj" />
       <ProjectReference Include="..\..\src\YandexWeatherApi\YandexWeatherApi.csproj" />
     </ItemGroup>
 

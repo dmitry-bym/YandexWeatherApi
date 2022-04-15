@@ -35,18 +35,17 @@ public static class YandexWeatherApiDependencyInjectionExtensions
     {
         switch (settings.Client, settings.ClientFactory)
         {
-            case ({ }, { }):
-                break;
-            case (_, { }):
-                builder.UseHttpClientFactory(settings.ClientFactory);
-                break;
-            case ({ }, _):
-                builder.UseHttpClient(settings.Client);
-                break;
-            default:
+            case (null, null):
                 var factory = serviceProvider.GetService<IHttpClientFactory>();
                 if (factory is not null)
                     builder.UseHttpClientFactory(factory);
+                break;
+            default:
+                builder.Configure(options =>
+                {
+                    options.Client = settings.Client;
+                    options.ClientFactory = settings.ClientFactory;
+                });
                 break;
         }
 

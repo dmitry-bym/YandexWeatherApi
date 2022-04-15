@@ -37,9 +37,9 @@ internal class YandexWeatherServiceBuilder : IYandexWeatherServiceBuilder
     private void Validate()
     {
         if (string.IsNullOrWhiteSpace(_options.ApiKey))
-            throw new YandexWeatherApiValidationException("Can not be null or empty", nameof(_options.ApiKey), "***");
+            throw new YandexWeatherApiValidationException("Can not be null or empty.", nameof(_options.ApiKey), "***");
 
         if (_options.ClientFactory is not null && _options.Client is not null)
-            throw new YandexWeatherApiConflictException($"Unable to use {nameof(_options.ClientFactory)} and {nameof(_options.Client)} together");
+            throw new YandexWeatherApiConflictException($"Unable to use {nameof(_options.ClientFactory)} and {nameof(_options.Client)} together.");
     }
 }

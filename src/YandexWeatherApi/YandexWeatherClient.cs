@@ -19,10 +19,10 @@ internal class YandexWeatherClient : IYandexWeatherClient
     internal YandexWeatherClient(IHttpClientFactory? clientFactory, HttpClient? client, ILogger? logger, string apiKey)
     {
         if (clientFactory is not null && client is not null)
-            throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together");
+            throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together.");
 
         if (clientFactory is null && client is null)
-            throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request");
+            throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request.");
         
         _logger = logger;
         _client = client;
@@ -35,10 +35,10 @@ internal class YandexWeatherClient : IYandexWeatherClient
     {
         return (_clientFactory, _client) switch
         {
-            ({ }, { }) => throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together"),
+            ({ }, { }) => throw new YandexWeatherApiConflictException($"Unable to use {nameof(IHttpClientFactory)} and {nameof(HttpClient)} together."),
             (_, { }) => SendClient<TResponse>(request, ct),
             ({ }, _) => SendFactory<TResponse>(request, ct),
-            _ => throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request")
+            _ => throw new YandexWeatherApiConflictException($"There is no {nameof(IHttpClientFactory)} or {nameof(HttpClient)} to send the request.")
         };
     }
 

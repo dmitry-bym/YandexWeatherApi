@@ -49,7 +49,7 @@ internal abstract class YandexWeatherRequestBase<TResponse> : IYandexWeatherRequ
     private void Validate()
     {
         if (WeatherLocality is null)
-            throw new YandexWeatherApiValidationException("invalid value", nameof(WeatherLocality), WeatherLocality);
+            throw new YandexWeatherApiValidationException("invalid value.", nameof(WeatherLocality), WeatherLocality);
     }
 
     protected virtual void FillRequestParams(IDictionary<string, string> dict)
