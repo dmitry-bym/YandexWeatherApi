@@ -6,7 +6,7 @@ on:
     
 jobs:
   build-test-pack:
-    if: startsWith(github.event.release.name, 'di:')
+    if: startsWith(${{ github.event.release.name }}, 'di:')
     runs-on: ubuntu-latest
     steps:
     - run: echo "Name:${{ github.event.release.name }}"
