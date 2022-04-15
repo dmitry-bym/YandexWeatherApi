@@ -57,3 +57,22 @@ Or you can use service provider to resolve dependencies
         options.ApiKey = "key";
     });
 ```
+After registration just resolve `IYandexWeatherRequestCreator`
+```c#
+    private readonly IYandexWeatherRequestCreator _requestCreator;
+    public WeatherForecastController(IYandexWeatherRequestCreator requestCreator)
+    {
+        _requestCreator = requestCreator;
+    }
+
+    [HttpGet(Name = "GetWeatherForecast")]
+    public async Task<ForecastResponse> Get(CancellationToken ct)
+    {
+        var a = await _requestCreator.Forecast()
+            .Extra()
+            .WithLocality(55, 21)
+            .Send(ct);
+        
+        return a.Data;
+    }
+```
