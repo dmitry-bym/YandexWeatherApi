@@ -70,12 +70,12 @@ After registration just resolve `IYandexWeatherRequestCreator`
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<ForecastResponse> Get(CancellationToken ct)
     {
-        var a = await _requestCreator.Forecast()
+        var result = await _requestCreator.Forecast()
             .Extra()
             .WithLocality(55, 21)
             .Send(ct);
         
-        return a.Data;
+        return result.Data;
     }
 ```
 
