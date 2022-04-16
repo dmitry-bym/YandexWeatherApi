@@ -16,10 +16,16 @@ var request = YandexWeather.CreateBuilder()
 To add parameters you can use extension or set it to fields
 ```c#
 request.WeatherLocale = WeatherLocale.be_BY;
+request.Extra = true;
+request.Hours = true;
 ```
 Or
 ```c#
-request.WithLocale(WeatherLocale.be_BY);
+request
+    .WithLocale(WeatherLocale.be_BY)
+    .Hours()
+    .Extra(false)
+    .WithLocality(55, 21);
 ```
     
 ### Send request
