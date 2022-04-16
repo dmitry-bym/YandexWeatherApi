@@ -85,6 +85,9 @@ After registration just resolve `IYandexWeatherRequestCreator`
     }
 ```
 
+### Default behaviour
+If `HttpClient` and `IHttpClientFactory` wasn't send it will try to resolve `IHttpClientFactory` from Services, if factory wasn't found it will create `new HttpClient()`
+
 ## License
 
 Authored by: Dmitry Kaznacheev (dmitry-bym)
