@@ -24,7 +24,7 @@ public class Part
 
     [JsonPropertyName("humidity")] public int Humidity { get; set; }
 
-    [JsonPropertyName("prec_mm")] public int PrecMm { get; set; }
+    [JsonPropertyName("prec_mm")] public float PrecMm { get; set; }
 
     [JsonPropertyName("prec_prob")] public int PrecProb { get; set; }
 
